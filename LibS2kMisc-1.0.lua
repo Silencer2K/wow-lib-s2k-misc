@@ -1,4 +1,4 @@
-local MAJOR, MINOR = "LibS2kMisc-1.0", 201507292
+local MAJOR, MINOR = "LibS2kMisc-1.0", 201507293
 
 local lib, oldMinor = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
@@ -56,4 +56,27 @@ function table.values(tab, needUnpack)
             return v
         end
     end
+end
+
+-- in-game functions
+
+function UnitInfoFromGuid(guid)
+    local parts = {strsplit('-', guid)}
+    local type = parts[1]
+
+    if type == 'Creature' or type == 'Vehicle' then
+        local id = tonumber(parts[6])
+        return type, id
+    end
+
+    return type
+end
+
+if not oldMinor then
+    local saved = { search = "" }
+
+    hooksecurefunc(C_PetJournal, "ClearSearchFilter", function() saved.search = "" end)
+    hooksecurefunc(C_PetJournal, "SetSearchFilter", function(text) saved.search = text end)
+
+    C_PetJournal.GetSearchFilter = function() return saved.search end
 end

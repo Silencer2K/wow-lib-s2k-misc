@@ -22,3 +22,9 @@ Synopsis:
     for item_1, item_2, item_3 in table.values(tab, true) do
         -- do something
     end
+
+    -- in-game functions
+
+    type, ... = UnitInfoFromGuid(guid)
+
+    text = C_PetJournal.GetSearchFilter()

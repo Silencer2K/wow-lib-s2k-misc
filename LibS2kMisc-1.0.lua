@@ -1,4 +1,4 @@
-local MAJOR, MINOR = "LibS2kMisc-1.0", 201507293
+local MAJOR, MINOR = "LibS2kMisc-1.0", 201507294
 
 local lib, oldMinor = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
@@ -72,11 +72,15 @@ function UnitInfoFromGuid(guid)
     return type
 end
 
-if not oldMinor then
+local function HookPetJournal()
     local saved = { search = "" }
 
     hooksecurefunc(C_PetJournal, "ClearSearchFilter", function() saved.search = "" end)
     hooksecurefunc(C_PetJournal, "SetSearchFilter", function(text) saved.search = text end)
 
     C_PetJournal.GetSearchFilter = function() return saved.search end
+end
+
+if not oldMinor then
+    HookPetJournal()
 end

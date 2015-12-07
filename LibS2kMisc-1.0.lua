@@ -1,18 +1,18 @@
-local MAJOR, MINOR = "LibS2kMisc-1.0", 201507294
+local MAJOR, MINOR = "LibS2kMisc-1.0", 201512071
 
 local lib, oldMinor = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
 -- table extensions
 
-function table.is_empty(tab)
+function table.s2k_is_empty(tab)
     for _ in pairs(tab) do
         return false
     end
     return true
 end
 
-function table.len(tab)
+function table.s2k_len(tab)
     local count = 0
     for _ in pairs(tab) do
         count = count + 1
@@ -20,7 +20,7 @@ function table.len(tab)
     return count
 end
 
-function table.select(tab, ...)
+function table.s2k_select(tab, ...)
     local indexes, res = {...}, {}
     local i, j = 0
     for _, j in ipairs(indexes) do
@@ -30,7 +30,7 @@ function table.select(tab, ...)
     return unpack(res, 1, i)
 end
 
-function table.pairs(tab, needUnpack)
+function table.s2k_pairs(tab, needUnpack)
     local index
     return function()
         local k, v = next(tab, index)
@@ -44,7 +44,7 @@ function table.pairs(tab, needUnpack)
     end
 end
 
-function table.values(tab, needUnpack)
+function table.s2k_values(tab, needUnpack)
     local index
     return function()
         local k, v = next(tab, index)

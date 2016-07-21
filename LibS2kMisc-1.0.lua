@@ -1,4 +1,4 @@
-local MAJOR, MINOR = "LibS2kMisc-1.0", 201512071
+local MAJOR, MINOR = "LibS2kMisc-1.0", 201607211
 
 local lib, oldMinor = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end

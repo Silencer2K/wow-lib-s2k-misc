@@ -1,4 +1,4 @@
-local MAJOR, MINOR = "LibS2kMisc-1.0", 201607211
+local MAJOR, MINOR = "LibS2kMisc-1.0", 201607281
 
 local lib, oldMinor = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
@@ -56,6 +56,19 @@ function table.s2k_values(tab, needUnpack)
             return v
         end
     end
+end
+
+function table.s2k_copy(tab)
+    local ret = {}
+    local k, v
+    for k, v in pairs(tab) do
+        if type(v) == "table" then
+            ret[k] = table.s2k_copy(v)
+        else
+            ret[k] = v
+        end
+    end
+    return ret
 end
 
 -- in-game functions
